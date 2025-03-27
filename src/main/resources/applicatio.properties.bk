@@ -1,0 +1,9 @@
+server.port=8081
+spring.application.name=belajar-spring-boot
+app.name=Gen
+app.currency=IDR
+
+#---
+spring.profiles.active=development
+server.port=8083
+app.name=Gen Development

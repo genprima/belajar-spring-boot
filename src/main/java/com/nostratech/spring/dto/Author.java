@@ -1,4 +1,4 @@
-package com.nostratech.spring.config;
+package com.nostratech.spring.dto;
 
 //this is pojo class
 

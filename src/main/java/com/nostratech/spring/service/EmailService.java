@@ -1,4 +1,4 @@
-package com.nostratech.spring.config;
+package com.nostratech.spring.service;
 
 import org.springframework.stereotype.Service;
 

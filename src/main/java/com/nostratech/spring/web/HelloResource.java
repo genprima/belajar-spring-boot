@@ -1,36 +1,27 @@
 package com.nostratech.spring.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.nostratech.spring.config.EmailService;
+import com.nostratech.spring.config.ApplicationProperties;
 
 @Controller
 @ResponseBody
 @RequestMapping(value = "/v1/hello")
 public class HelloResource {
 
-    private final EmailService emailService;
+    @Autowired
+    private ApplicationProperties applicationProperties;
 
-    public HelloResource(EmailService emailService) {
-        this.emailService = emailService;
-    }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping()
     public String hello() {
-        return "hello";
+        return "Hello " + applicationProperties.getName() +
+               " with currency " + applicationProperties.getCurrency();
     }
 
-    @RequestMapping(value = "/send-mail", method = RequestMethod.POST)
-    public String mail(@RequestBody String messages) {
-        try {
-            emailService.sendMail(messages);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "mail sent";
-    }
+    
 }
