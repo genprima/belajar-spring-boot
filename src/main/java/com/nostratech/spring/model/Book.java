@@ -1,4 +1,4 @@
-package com.nostratech.spring.dto;
+package com.nostratech.spring.model;
 
 //Class Book has a dependency on class Author
 public class Book {

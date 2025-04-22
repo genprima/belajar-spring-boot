@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import com.nostratech.spring.dto.Author;
-import com.nostratech.spring.dto.Book;
+import com.nostratech.spring.model.Author;
+import com.nostratech.spring.model.Book;
 
 import jakarta.mail.Authenticator;
 import jakarta.mail.PasswordAuthentication;
