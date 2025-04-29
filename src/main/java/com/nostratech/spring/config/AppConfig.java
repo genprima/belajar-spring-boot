@@ -43,13 +43,13 @@ public class AppConfig {
         return author;
     }
 
-    @Bean
-    public Book book1(){
-        Book book = new Book("How to be a good programmer from Java Config", author1());
-        book.setTitle("Spring in Action 6th Edition");
-        book.setAuthor(author1());
-        return book;
-    }
+    // @Bean
+    // public Book book1(){
+    //     Book book = new Book("How to be a good programmer from Java Config", author1());
+    //     book.setTitle("Spring in Action 6th Edition");
+    //     book.setAuthor(author1());
+    //     return book;
+    // }
 
     //This can be used in Annotation Base or Java Config
     @Bean

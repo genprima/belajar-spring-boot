@@ -1,28 +1,39 @@
 package com.nostratech.spring.service;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.nostratech.spring.dto.AuthorDto;
+import com.nostratech.spring.model.Author;
+import com.nostratech.spring.repository.AuthorRepository;
 
 
 @Service
 public class AuthorService {
 
-    private static List<AuthorDto> authors = new ArrayList<>();
+    private final AuthorRepository authorRepository;
+
+    public AuthorService(AuthorRepository authorRepository) {
+        this.authorRepository = authorRepository;
+    }
 
     public void createAuthor(AuthorDto authorDto) {
-        authors.add(new AuthorDto(authorDto.name(), authorDto.description()));
+        Author author = new Author();
+        author.setName(authorDto.name());
+        author.setDescription(authorDto.description());
+        authorRepository.save(author);
     }
 
     public List<AuthorDto> getAuthors() {
-        return authors.stream()
-                .map(a-> new AuthorDto(a.name(), a.description()))
+        return authorRepository.findAll().stream()
+                .map(a-> new AuthorDto(a.getName(), a.getDescription()))
                 .toList();
     }
 
-    public String getByIndex(int index) {
-        return authors.get(index).name();
+    public List<AuthorDto> findAuthors(String name) {
+        name = name + "%";
+        return authorRepository.findByName(name).stream()
+                .map(a -> new AuthorDto(a.getName(), a.getDescription()))
+                .toList();
     }
 }

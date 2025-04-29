@@ -5,6 +5,24 @@ app:
   name: "Gen"
   currency: "USD"
 
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/backend_class
+    username: gen
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 600000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
 ---
 spring:
   config:
