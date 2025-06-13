@@ -1,5 +1,9 @@
 server:
   port: 8080
+  error.include-message: always
+  error.include-binding-errors: always
+  error.include-stacktrace: always
+  error.include-exception: true
 
 app:
   name: "Gen"
@@ -28,6 +32,17 @@ spring:
   config:
     activate:
       on-profile: development
+  datasource:
+    url: jdbc:postgresql://localhost:5432/backend_class
+    username: gen
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
 
 server:
   port: 8081
@@ -35,3 +50,34 @@ server:
 app:
   name: "Gen Development"
   currency: "IDR"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    # These will be overridden by TestContainers
+    url: jdbc:postgresql://localhost:5432/testdb
+    username: test
+    password: test
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: create-drop  # Clean database for each test
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
+server:
+  port: 8080
+
+app:
+  name: "Gen Test"
+  currency: "USD"
+
+minio:
+  endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
+  accessKey: ${MINIO_ACCESS_KEY:minioadmin}
+  secretKey: ${MINIO_SECRET_KEY:minioadmin}
+  bucket: my-bucket

@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    # Database connection will be handled by TestContainers
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+    # No depends_on needed as TestContainers will manage the database
+
+networks:
+  backend_class-network:
+    driver: bridge
+
+volumes:
+  postgres_test_data: 
